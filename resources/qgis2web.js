@@ -84,6 +84,7 @@ var asahidake = ol.proj.fromLonLat([142.84192,43.66144]);
 var nakadakeOnsen = ol.proj.fromLonLat([142.84258,43.67512]);
 
 var view = new ol.View({
+    center: asahidake,
     extent: [15890800.0, 5401150.0, 15918700.0, 5426850.0],
     zoom: 12,
     maxZoom: 16, minZoom: 11
@@ -108,8 +109,6 @@ function fitView(extent) {
         duration: 300 // Animation
     });
 }
-
-fitView('loop');
 
 // レイヤーグループ
 const photosGroup = new ol.layer.Group({
