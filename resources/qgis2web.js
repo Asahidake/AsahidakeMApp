@@ -187,6 +187,11 @@ onClick('aboutDaisetsuzanGrade',function(){
     pushStateAndLoad('aboutDaisetsuzanGrade');
 });
 
+//ブログ
+onClick('blog',function(){
+    pushStateAndLoad('blogParse');
+});
+
 //写真レイヤーグループの中のVisible写真
 function getVisiblePhotos () {
     const visiblePhotoLayers = photosGroup
