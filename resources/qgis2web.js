@@ -188,7 +188,7 @@ onClick('aboutDaisetsuzanGrade',function(){
 });
 
 //ブログ
-onClick('blog',function(){
+onClick('aboutUs',function(){
     pushStateAndLoad('blogParse');
 });
 

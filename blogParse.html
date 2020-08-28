@@ -1,15 +1,28 @@
 <script>
-	var requestURL = 'https://script.googleusercontent.com/macros/echo?user_content_key=2IExJkKkly_iRlOYAQGZkII_PDrQ1pBlMHKZwLpDzqgoD_ydTo8eolVd297bTt_xTzOfU-00E-TZeJ6DgtpNjVyD4xgsbZGYm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnFjHTxNqdrto8dWNzkpG4-GGssyVNSIUk0WaMkPpUXurdpgegtAfud6Z_kcKr-1V1Q&lib=MNpuExtTMT_pPEdvfbstYnQyfUjkjTl6r';
-	var request = new XMLHttpRequest();
-	request.open('GET', requestURL);
+	var requestURL = 'https://script.google.com/macros/s/AKfycbytCdyeJyfRpIMuKBjsrpvoJ_knEvPXaAz4mmx9k9hRWgQXUIY/exec';
+	// var request = new XMLHttpRequest();
+	// request.open('GET', requestURL);
 
-	request.responseType = 'json';
-	request.send();
+	// request.responseType = 'json';
+	// request.send();
 
-	request.onload = function() {
-	  var blogData = request.response;
-	  console.dir(blogData);
-	}
+	// request.onload = function() {
+	//   var blogData = request.response;
+	//   console.dir(blogData);
+	// }
+
+	const endpoint = "https://script.google.com/macros/s/AKfycbytCdyeJyfRpIMuKBjsrpvoJ_knEvPXaAz4mmx9k9hRWgQXUIY/exec";
+    $.ajax({
+        type: 'GET',
+        url: endpoint,
+        dataType: 'jsonp',
+        data: {
+            text: 'Hi,There!'
+        },
+        success: out => {
+            console.dir(out.message);
+        }
+    });
 </script>
 
 
