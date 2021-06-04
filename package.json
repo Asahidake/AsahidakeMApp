@@ -2,17 +2,20 @@
   "name": "asahidake-map",
   "private": true,
   "version": "0.1.0",
-  "description": "旭岳の周辺に関するサイト",
+  "description": "旭岳監視員マップのサイト",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arichardsmith/AsahidakeMApp.git"
+    "url": "git+https://github.com/Asahidake/AsahidakeMApp.git"
   },
-  "author": "Takanori Iijima",
+  "contributors": [
+    "Takanori Iijima",
+    "Richard Smith"
+  ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/arichardsmith/AsahidakeMApp/issues"
+    "url": "https://github.com/Asahidake/AsahidakeMApp/issues"
   },
-  "homepage": "https://github.com/arichardsmith/AsahidakeMApp#readme",
+  "homepage": "https://github.com/Asahidake/AsahidakeMApp#readme",
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0",
     "@rollup/plugin-commonjs": "^15.0.0",
