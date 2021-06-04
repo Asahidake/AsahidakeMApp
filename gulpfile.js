@@ -10,13 +10,11 @@ const commonjs = require('@rollup/plugin-commonjs');
 const { terser } = require('rollup-plugin-terser');
 
 // CSS
-const sass = require('gulp-sass');
+const sass = require('gulp-dart-sass');
 const sassPackageImporter = require('node-sass-package-importer');
 const postCSS = require('gulp-postcss');
 const autoprefix = require('autoprefixer');
 const cssNano = require('cssnano');
-
-sass.compiler = require('node-sass');
 
 const r = (...path) => resolve(__dirname, ...path);
 
