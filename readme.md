@@ -1,5 +1,7 @@
 # 監視員サイト
 
+[旭岳監視員マップ](https://kanshiin.netlify.app/)のソースコードと内容。
+
 ## 開発
 ある`html`ファイルは[11ty.js](https://www.11ty.dev/)と言うStatic site generatorを利用し、`ejs`のテンプレートから作成ものだ。Static site generatorに関するものを編集する場合は[Node.js](https://nodejs.org/ja/)が必要。
 
