@@ -113,7 +113,7 @@ function handlePhotoClick(e) {
 
 //写真HTML Template
 export function imgHTML(src) {
-  return `<img class="fit-picture" src="${src}" />`;
+  return `<img class="fit-picture" src="${src}" loading="lazy" />`;
 }
 
 //マップクリックイベント
