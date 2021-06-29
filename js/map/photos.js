@@ -10,48 +10,60 @@ const PHOTO_ROOT = '/images/MapPics/';
 /**
  * Photoレイヤー定義
  */
-export const nakadakeLayer = createPhotoLayer({
-  source: 'nakadake.json',
-  title: '中岳温泉コース',
-  color: 'rgba(126,179,44,1)',
-});
+// Cache group so it is only created once
+let photosGroup = null
 
-export const summitLayer = createPhotoLayer({
-  source: 'summit.json',
-  title: '旭岳山頂コース',
-  color: 'rgba(255,202,0,1)',
-});
+export function getPhotosGroup() {
+  if (photosGroup !== null) {
+    return photosGroup
+  }
 
-export const loopLayer = createPhotoLayer({
-  source: 'loop.json',
-  title: '一日周回コース',
-  color: 'rgba(242,133,0,1)',
-});
+  const nakadakeLayer = createPhotoLayer({
+    source: 'nakadake.json',
+    title: '中岳温泉コース',
+    color: 'rgba(126,179,44,1)',
+  });
+  
+  const summitLayer = createPhotoLayer({
+    source: 'summit.json',
+    title: '旭岳山頂コース',
+    color: 'rgba(255,202,0,1)',
+  });
+  
+  const loopLayer = createPhotoLayer({
+    source: 'loop.json',
+    title: '一日周回コース',
+    color: 'rgba(242,133,0,1)',
+  });
+  
+  const tennyogaLayer = createPhotoLayer({
+    source: 'tennyoga.json',
+    title: '天女ヶ原コース',
+    color: 'rgba(33,153,31,1)',
+  });
+  
+  const sugatamiLayer = createPhotoLayer({
+    source: 'sugatami.json',
+    title: '姿見の池園地内',
+    color: 'rgba(6,63,252,1)',
+  });
+  
+  const photoLayers = [
+    nakadakeLayer,
+    summitLayer,
+    loopLayer,
+    tennyogaLayer,
+    sugatamiLayer,
+  ];
+  
+  photosGroup = new Group({
+    title: '写真',
+    layers: photoLayers,
+  });
 
-export const tennyogaLayer = createPhotoLayer({
-  source: 'tennyoga.json',
-  title: '天女ヶ原コース',
-  color: 'rgba(33,153,31,1)',
-});
+  return photosGroup
+}
 
-export const sugatamiLayer = createPhotoLayer({
-  source: 'sugatami.json',
-  title: '姿見の池園地内',
-  color: 'rgba(6,63,252,1)',
-});
-
-const photoLayers = [
-  nakadakeLayer,
-  summitLayer,
-  loopLayer,
-  tennyogaLayer,
-  sugatamiLayer,
-];
-
-export const photosGroup = new Group({
-  title: '写真',
-  layers: photoLayers,
-});
 
 /**
  * 写真レイヤー変化イベント
@@ -103,6 +115,8 @@ function createPhotoLayer(opts) {
   });
 
   layer.on('change:source', updateLocationMap);
+  layer.on('change:source', handlePhotoChange);
+  layer.on('change:visible', handlePhotoChange);
 
   const source = loadSource(opts.source);
   connectGeoJSONSource(layer, source);
@@ -143,8 +157,3 @@ function handlePhotoChange() {
     photoCBs.forEach((cb) => cb());
   }, LOAD_DEBOUNCE);
 }
-
-photoLayers.forEach((layer) => {
-  layer.on('change:source', handlePhotoChange);
-  layer.on('change:visible', handlePhotoChange);
-});
