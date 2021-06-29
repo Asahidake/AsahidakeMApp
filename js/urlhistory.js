@@ -35,10 +35,10 @@ export async function doNav(target) {
       fitView("nakadake");
       highlightTrail("nakadake");
       break;
-    case "info":
+    /* case "info": -- 登山道情報 format changed for 2021 season, hiding page until updated to match new format
       await loadURL("#column", "info.html");
       highlightTrail(null);
-      break;
+      break;*/
     case "aboutDaisetsuzanGrade":
       await loadURL("#column", "aboutDaisetsuzanGrade.html");
       highlightTrail(null);
