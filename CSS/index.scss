@@ -73,6 +73,11 @@ div#pic {
   height:35px;
 }
 
+.navbar-link:not([href]) {
+  /* Nav links with no href (dropdown headers) should have a different cursor */
+  cursor: default;
+}
+
 @import './tozan-joho.scss';
 @import './blog.scss';
 @import './progress.scss';
