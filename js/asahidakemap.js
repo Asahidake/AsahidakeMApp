@@ -3,8 +3,8 @@ import { defaults, ScaleLine } from 'ol/control';
 import LayerSwitcher from 'ol-layerswitcher';
 
 import { extents } from './map/extents.js';
-import { photosGroup, onPhotosChange, getPhotoLocation } from './map/photos';
-import { baseTiles } from './map/base.js';
+import { getPhotosGroup, onPhotosChange, getPhotoLocation } from './map/photos';
+import { baseTiles, onTileLoadFinish } from './map/base.js';
 import { trailGroup, highlightTrail } from './map/trails.js';
 import { jpLabelsLayer, enLabelsLayer } from './map/labels.js';
 
@@ -54,8 +54,11 @@ export const layersList = [
   jpLabelsLayer,
   enLabelsLayer,
   trailGroup,
-  photosGroup,
 ];
+
+onTileLoadFinish(() => {
+  map.addLayer(getPhotosGroup());
+});
 
 //---マップの定義
 export const map = new Map({
@@ -82,6 +85,10 @@ function DisplayPicColumn() {
 
   picColumn.innerHTML = newHTML;
 
+  if (visiblePhotos.length > 0 & picColumn.classList.contains("loading-images")) {
+    picColumn.classList.remove("loading-images");
+  }
+
   // 表示写真がない場合、no-picクラス付け
   if (visiblePhotos.length < 1) {
     picColumn.classList.add('no-pics');
@@ -106,14 +113,14 @@ function handlePhotoClick(e) {
 
 //写真HTML Template
 export function imgHTML(src) {
-  return `<img class="fit-picture" src="${src}" />`;
+  return `<img class="fit-picture" src="${src}" loading="lazy" />`;
 }
 
 //マップクリックイベント
 function handleMapPointer(evt) {
   const pixel = evt.pixel;
   let coord = null;
-  const photoLayers = photosGroup.getLayers().getArray();
+  const photoLayers = getPhotosGroup().getLayers().getArray();
 
   const imgs = [];
   map.forEachFeatureAtPixel(pixel, (feature, layer) => {
@@ -149,7 +156,7 @@ function handleMapPointer(evt) {
 
 //写真レイヤーグループの中のVisible写真
 function getVisiblePhotos() {
-  const visiblePhotoLayers = photosGroup
+  const visiblePhotoLayers = getPhotosGroup()
     .getLayers()
     .getArray() // Array変化
     .filter((layer) => layer.getVisible() && layer.getSource() !== null); // VisibleかSourceのあにレイヤー抜く
